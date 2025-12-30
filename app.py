@@ -3,7 +3,6 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score, mean_absolute_error
@@ -22,7 +21,7 @@ regions = {
                           "Lakshadweep", "Puducherry", "Jammu and Kashmir", "Ladakh"]
 }
 
-# --- Synthetic dataset generator with irregularities ---
+# --- Synthetic dataset generator ---
 @st.cache_data
 def generate_data(samples_per_combo=60, seed=42):
     rng = np.random.default_rng(seed)
@@ -39,14 +38,12 @@ def generate_data(samples_per_combo=60, seed=42):
 
                 base = {"Monsoon": 50, "Winter": 20, "Summer": 10}[season]
 
-                # Add irregularities: nonlinear + noise
                 rainfall = (
                     0.6 * humidity
                     - 0.4 * temperature
                     - 0.3 * wind_speed
                     + base
-                    + 0.05 * humidity * rng.normal(0, 1, n)  # nonlinear noise
-                    + rng.normal(0, 10, n)  # bigger variance
+                    + rng.normal(0, 10, n)
                 )
                 rainfall = np.clip(rainfall, 0, None)
 
@@ -86,11 +83,7 @@ hum = st.sidebar.slider("Humidity (%)", 30.0, 100.0, 70.0, 0.5)
 temp = st.sidebar.slider("Temperature (°C)", 10.0, 40.0, 25.0, 0.5)
 wind = st.sidebar.slider("Wind speed (m/s)", 0.0, 12.0, 3.0, 0.1)
 
-# --- Main page ---
-st.title("🌧️ Rainfall Prediction Across Indian States")
-st.write("Realistic ML-style dataset with irregularities, train/test split, and multiple charts.")
-
-# --- Prediction with proper encoding ---
+# --- Prediction ---
 user_df = pd.DataFrame({
     "humidity": [hum],
     "temperature": [temp],
@@ -105,6 +98,8 @@ for col in X_train.columns:
         user_encoded[col] = 0
 user_encoded = user_encoded[X_train.columns]
 pred = model.predict(user_encoded)[0]
+
+st.title("🌧️ Rainfall Prediction Across Indian States")
 st.metric(f"Predicted rainfall in {state_choice} ({season_choice})", f"{pred:.2f} mm")
 
 # --- Model evaluation ---
@@ -114,45 +109,50 @@ st.write(f"R² Score: {r2_score(y_test, y_pred_test):.3f}")
 st.write(f"Mean Absolute Error: {mean_absolute_error(y_test, y_pred_test):.2f} mm")
 
 # --- Scatter plot ---
-st.subheader("Humidity vs Rainfall (trend)")
-fig1, ax1 = plt.subplots(figsize=(6,4))
+st.subheader("Humidity vs Rainfall")
+fig1, ax1 = plt.subplots()
 subset = df[(df["state"]==state_choice) & (df["season"]==season_choice)]
-ax1.scatter(subset["humidity"], subset["rainfall_mm"], alpha=0.5, label="data points")
+ax1.scatter(subset["humidity"], subset["rainfall_mm"], alpha=0.5)
 ax1.set_xlabel("Humidity (%)")
 ax1.set_ylabel("Rainfall (mm)")
-ax1.legend()
 st.pyplot(fig1)
 
-# --- Residuals plot ---
+# --- Residuals histogram ---
 st.subheader("Residuals Distribution")
 residuals = y_test - y_pred_test
-fig2, ax2 = plt.subplots(figsize=(6,4))
-sns.histplot(residuals, bins=30, kde=True, ax=ax2, color="purple")
+fig2, ax2 = plt.subplots()
+ax2.hist(residuals, bins=30, color="purple", alpha=0.7)
 ax2.set_xlabel("Residual (Actual - Predicted)")
 ax2.set_ylabel("Frequency")
 st.pyplot(fig2)
 
-# --- Correlation heatmap ---
+# --- Correlation heatmap (matplotlib only) ---
 st.subheader("Feature Correlation Heatmap")
-fig3, ax3 = plt.subplots(figsize=(8,6))
-sns.heatmap(df[["humidity","temperature","wind_speed","rainfall_mm"]].corr(), annot=True, cmap="coolwarm", ax=ax3)
+corr = df[["humidity","temperature","wind_speed","rainfall_mm"]].corr()
+fig3, ax3 = plt.subplots()
+cax = ax3.matshow(corr, cmap="coolwarm")
+fig3.colorbar(cax)
+ax3.set_xticks(range(len(corr.columns)))
+ax3.set_yticks(range(len(corr.columns)))
+ax3.set_xticklabels(corr.columns, rotation=45)
+ax3.set_yticklabels(corr.columns)
+for (i, j), val in np.ndenumerate(corr.values):
+    ax3.text(j, i, f"{val:.2f}", ha="center", va="center", color="black")
 st.pyplot(fig3)
 
 # --- Region-wise bar chart ---
 st.subheader(f"Average Rainfall in {region_choice}")
 avg_rainfall = df[df["region"]==region_choice].groupby("state")["rainfall_mm"].mean().sort_values()
-fig4, ax4 = plt.subplots(figsize=(8,5))
+fig4, ax4 = plt.subplots()
 avg_rainfall.plot(kind="bar", ax=ax4, color="skyblue")
 ax4.set_ylabel("Average Rainfall (mm)")
-ax4.set_title(f"State-wise Average Rainfall in {region_choice}")
 st.pyplot(fig4)
 
 # --- Pie chart of seasonal distribution ---
 st.subheader("Seasonal Rainfall Share")
 seasonal_avg = df.groupby("season")["rainfall_mm"].mean()
 fig5, ax5 = plt.subplots()
-ax5.pie(seasonal_avg, labels=seasonal_avg.index, autopct="%1.1f%%", startangle=90, colors=["#66c2a5","#fc8d62","#8da0cb"])
-ax5.set_title("Average Rainfall by Season")
+ax5.pie(seasonal_avg, labels=seasonal_avg.index, autopct="%1.1f%%", startangle=90)
 st.pyplot(fig5)
 
 # --- Dataset preview ---
