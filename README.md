@@ -44,7 +44,7 @@ This project predicts rainfall across Indian states using a linear regression mo
 
 ## 🏗️ Project Structure
 
-`
+```
 rainfall-prediction/
 ├── app.py                  # Main Streamlit app
 ├── requirements.txt        # Python dependencies
@@ -53,30 +53,30 @@ rainfall-prediction/
 │   └── 00.png
 ├── README.md               # Project documentation
 └── LICENSE                 # MIT License
-`
+```
 
 ---
 
 ## 📦 Installation
 
-`bash
+```
 git clone https://github.com/your-username/rainfall-prediction.git
 cd rainfall-prediction
 pip install -r requirements.txt
 streamlit run app.py
-`
+```
 
 ---
 
 ## 📚 Requirements
 
-`text
+```
 streamlit==1.38.0
 scikit-learn==1.4.2
 pandas==2.2.2
 numpy==1.26.4
 matplotlib==3.8.4
-`
+```
 
 ---
 
@@ -100,5 +100,3 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 Built with ❤️ by Gyanankur Baruah  
 Inspired by India's diverse climate and the power of data storytelling.
-
-`
