@@ -64,16 +64,23 @@ def generate_data(samples_per_combo=60, seed=42):
 df = generate_data()
 
 # --- Train model ---
+# --- Train model ---
 @st.cache_resource
 def train_model(df):
-    X = df[["humidity", "temperature", "wind_speed"]]
-    y = df["rainfall_mm"]
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    # One-hot encode categorical features
+    df_encoded = pd.get_dummies(df, columns=["region", "state", "season"], drop_first=True)
+
+    X = df_encoded.drop("rainfall_mm", axis=1)
+    y = df_encoded["rainfall_mm"]
+
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42
+    )
     model = LinearRegression().fit(X_train, y_train)
     return model, X_train, X_test, y_train, y_test
 
+# Call the function
 model, X_train, X_test, y_train, y_test = train_model(df)
-
 # --- Sidebar controls ---
 st.sidebar.header("Controls")
 region_choice = st.sidebar.selectbox("Select Region", list(regions.keys()))
