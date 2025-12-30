@@ -1,5 +1,3 @@
-# Rainfall-prediction-using-logistic-regression
-
 # 🌧️ Rainfall Prediction Across Indian States
 
 [![Live Demo](https://img.shields.io/badge/Streamlit-Dashboard-green?logo=streamlit)](https://rainfall-prediction-using-logistic-regression-uwytqfuawnth26wx.streamlit.app/#model-performance)
