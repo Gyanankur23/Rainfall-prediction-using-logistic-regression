@@ -5,7 +5,7 @@
 [![Live Demo](https://img.shields.io/badge/Streamlit-Dashboard-green?logo=streamlit)](https://rainfall-prediction-using-logistic-regression-uwytqfuawnth26wx.streamlit.app/#model-performance)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
-[![Made with ❤️ in India](https://img.shields.io/badge/Made%20in-India-orange)](https://github.com/gyanankur)
+[![Made with ❤️ in India](https://img.shields.io/badge/Made%20in-India-orange)](https://github.com/Gyanankur23)
 
 ---
 
@@ -46,58 +46,6 @@ This project predicts rainfall across Indian states using a linear regression mo
 
 ## 🏗️ Project Structure
 
-Here’s a complete README.md for your rainfall prediction project — structured professionally with badges, demo images, and clear sections from start to finish:
-
----
-
-`markdown
-
-🌧️ Rainfall Prediction Across Indian States
-
-![Live Demo](https://rainfall-prediction-using-logistic-regression-uwytqfuawnth26wx.streamlit.app/#model-performance)
-![License](LICENSE)
-![Python](https://www.python.org/)
-![Made with ❤️ in India](https://github.com/gyanankur)
-
----
-
-📌 Overview
-
-This project predicts rainfall across Indian states using a linear regression model trained on synthetic but realistic weather data. It features an interactive Streamlit dashboard with region/state/season selectors, sliders for weather conditions, and dynamic visualizations.
-
----
-
-🚀 Live Demo
-
-👉 Click here to explore the dashboard
-
----
-
-📸 Demo Screenshots
-
-Delhi — Monsoon Season
-!Delhi Monsoon Prediction
-
-Kerala — Monsoon Season
-!Kerala Monsoon Prediction
-
----
-
-🧠 Features
-
-- 🔄 Interactive controls: Region, State, Season, Humidity, Temperature, Wind Speed  
-- 📊 Real-time rainfall prediction  
-- 📈 Model performance metrics: R² Score, MAE  
-- 📉 Residuals distribution  
-- 🔥 Correlation heatmap  
-- 📊 Bar chart: Average rainfall by state  
-- 🥧 Pie chart: Seasonal rainfall share  
-- 🧾 Dataset preview
-
----
-
-🏗️ Project Structure
-
 `
 rainfall-prediction/
 ├── app.py                  # Main Streamlit app
@@ -111,7 +59,7 @@ rainfall-prediction/
 
 ---
 
-📦 Installation
+## 📦 Installation
 
 `bash
 git clone https://github.com/your-username/rainfall-prediction.git
@@ -122,7 +70,7 @@ streamlit run app.py
 
 ---
 
-📚 Requirements
+## 📚 Requirements
 
 `text
 streamlit==1.38.0
@@ -134,7 +82,7 @@ matplotlib==3.8.4
 
 ---
 
-📈 Model Details
+## 📈 Model Details
 
 - Algorithm: Linear Regression  
 - Inputs: Humidity, Temperature, Wind Speed, Region, State, Season  
@@ -144,19 +92,15 @@ matplotlib==3.8.4
 
 ---
 
-📝 License
+## 📝 License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ---
 
-🙌 Acknowledgments
+## 🙌 Acknowledgments
 
 Built with ❤️ by Gyanankur Baruah  
 Inspired by India's diverse climate and the power of data storytelling.
 
 `
-
----
-
-Let me know if you'd like to auto-generate a LICENSE file or add a section for contributing guidelines.
