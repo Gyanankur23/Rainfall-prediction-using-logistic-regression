@@ -3,7 +3,7 @@
 [![Live Demo](https://img.shields.io/badge/Streamlit-Dashboard-green?logo=streamlit)](https://rainfall-prediction-using-logistic-regression-uwytqfuawnth26wx.streamlit.app/#model-performance)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
-[![Made with ❤️ in India](https://img.shields.io/badge/Made%20byGyanankur Baruah-orange)](https://github.com/Gyanankur23)
+[![Made by](https://img.shields.io/badge/Made%20byGyanankur Baruah-orange)](https://github.com/Gyanankur23)
 
 ---
 
