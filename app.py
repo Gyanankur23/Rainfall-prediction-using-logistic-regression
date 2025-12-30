@@ -99,7 +99,7 @@ for col in X_train.columns:
 user_encoded = user_encoded[X_train.columns]
 pred = model.predict(user_encoded)[0]
 
-st.title("🌧️ Rainfall Prediction Across Indian States")
+st.title("Rainfall Prediction Across Indian States")
 st.metric(f"Predicted rainfall in {state_choice} ({season_choice})", f"{pred:.2f} mm")
 
 # --- Model evaluation ---
