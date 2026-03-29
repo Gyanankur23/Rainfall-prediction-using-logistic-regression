@@ -9,7 +9,7 @@ from sklearn.metrics import r2_score, mean_absolute_error
 
 st.set_page_config(page_title="Rainfall Prediction India", layout="wide")
 
-# --- Regions and States mapping ---
+# Regions and States mapping 
 regions = {
     "North": ["Delhi", "Punjab", "Haryana", "Uttar Pradesh", "Uttarakhand", "Himachal Pradesh"],
     "South": ["Kerala", "Tamil Nadu", "Karnataka", "Andhra Pradesh", "Telangana"],
