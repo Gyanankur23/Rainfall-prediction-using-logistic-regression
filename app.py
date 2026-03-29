@@ -27,6 +27,7 @@ def generate_data(samples_per_combo=60, seed=42):
     rng = np.random.default_rng(seed)
     circumstances = ["Monsoon", "Winter", "Summer"]
 
+
     data = []
     for region, states in regions.items():
         for state in states:
