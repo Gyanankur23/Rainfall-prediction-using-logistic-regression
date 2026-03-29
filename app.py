@@ -155,6 +155,6 @@ fig5, ax5 = plt.subplots()
 ax5.pie(seasonal_avg, labels=seasonal_avg.index, autopct="%1.1f%%", startangle=90)
 st.pyplot(fig5)
 
-# --- Dataset preview ---
+# Dataset preview
 st.subheader("Dataset Sample")
 st.dataframe(df.sample(15))
