@@ -21,7 +21,7 @@ regions = {
                           "Lakshadweep", "Puducherry", "Jammu and Kashmir", "Ladakh"]
 }
 
-#  Synthetic dataset generator
+#  Synthetic dataset generator 
 @st.cache_data
 def generate_data(samples_per_combo=60, seed=42):
     rng = np.random.default_rng(seed)
